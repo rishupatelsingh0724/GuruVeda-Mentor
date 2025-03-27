@@ -25,11 +25,13 @@
         android:textColor="@color/orange"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/inria_sans_bold"
-        android:textSize="26sp"/>
+        android:textSize="26sp"
+        tools:ignore="HardcodedText" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="240dp"
-        android:text="Educate with Impact, Teach with Guruveda"/>
+        android:text="Educate with Impact, Teach with Guruveda"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>
