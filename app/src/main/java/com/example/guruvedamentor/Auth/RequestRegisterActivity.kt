@@ -36,7 +36,7 @@ class RequestRegisterActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
 
-            if (password != etConfirmPassword) {
+            if (password == etConfirmPassword) {
 
                 if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && etConfirmPassword.isNotEmpty() && mobile.isNotEmpty()) {
 
@@ -61,7 +61,7 @@ class RequestRegisterActivity : AppCompatActivity() {
                                             Toast.LENGTH_LONG
                                         ).show()
                                         auth.signOut()
-                                        finish() // Registration ke baad exit kar rahe hai
+                                        finish()
                                     }
                                     .addOnFailureListener { e ->
                                         Toast.makeText(
