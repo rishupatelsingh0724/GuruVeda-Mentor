@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash)
         Handler(Looper.getMainLooper()).postDelayed({
-            if (auth.currentUser!!.uid != null) {
+            if (auth.currentUser != null) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
