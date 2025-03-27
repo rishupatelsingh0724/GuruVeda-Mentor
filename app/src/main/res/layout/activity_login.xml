@@ -39,7 +39,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_edittext"
         android:hint="Enter Email"
-        android:inputType="phone"
+        android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textSize="16sp" />
 
