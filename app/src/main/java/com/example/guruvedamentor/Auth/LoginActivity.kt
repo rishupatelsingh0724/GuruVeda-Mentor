@@ -12,13 +12,12 @@ import androidx.appcompat.widget.AppCompatButton
 import com.example.guruvedamentor.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlin.jvm.java
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseFirestore.getInstance()
-      var dbEmail: String?=null
-      var dbPassword: String?=null
+    var dbEmail: String? = null
+    var dbPassword: String? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
         db.collection("teachers").document(auth.currentUser!!.uid).get()
             .addOnSuccessListener { result ->
-                if (result.exists())  {
+                if (result.exists()) {
                     dbEmail = result.getString("teacherEmail")
                     dbPassword = result.getString("teacherPassword")
                 }
@@ -54,23 +53,23 @@ class LoginActivity : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
-        if (dbEmail == email && dbPassword == password) {
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            val uid = auth.currentUser?.uid!!
-                            checkApprovalStatus(uid)
-                        } else {
-                            Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
+            if (dbEmail == email && dbPassword == password) {
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val uid = auth.currentUser?.uid!!
+                                checkApprovalStatus(uid)
+                            } else {
+                                Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
+                            }
                         }
-                    }
+                } else {
+                    Toast.makeText(this, "Enter email and password!", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this, "Enter email and password!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_SHORT).show()
             }
-        } else {
-            Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_SHORT).show()
-        }
         }
     }
 
@@ -86,7 +85,8 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this, LoginActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Approval Pending. Please wait!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Approval Pending. Please wait!", Toast.LENGTH_LONG)
+                            .show()
                         auth.signOut()
                     }
                 } else {
