@@ -12,7 +12,6 @@ import androidx.appcompat.widget.AppCompatButton
 import com.example.guruvedamentor.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlin.jvm.java
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -41,21 +40,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RequestRegisterActivity::class.java))
         }
 
-        db.collection("teachers").document(auth.currentUser!!.uid).get()
-            .addOnSuccessListener { result ->
-                if (result.exists())  {
-                    dbEmail = result.getString("teacherEmail")
-                    dbPassword = result.getString("teacherPassword")
-                }
-            }
-
-
-
-
 
         btnLogin.setOnClickListener {
-        if (dbEmail == email && dbPassword == password) {
+
             if (email.isNotEmpty() && password.isNotEmpty()) {
+                if (dbEmail == email && dbPassword == password) {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -65,12 +54,13 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
                         }
                     }
+                } else {
+                    Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this, "Enter email and password!", Toast.LENGTH_SHORT).show()
             }
-        } else {
-            Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_SHORT).show()
-        }
+
         }
     }
 
@@ -80,7 +70,9 @@ class LoginActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val status = document.getString("status")
+                    val status = document.getString("teacherStatus")
+                    dbEmail = document.getString("teacherEmail")
+                    dbPassword = document.getString("teacherPassword")
                     if (status == "approved") {
                         Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, LoginActivity::class.java))
