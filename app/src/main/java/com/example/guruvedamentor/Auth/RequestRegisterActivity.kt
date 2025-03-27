@@ -24,11 +24,11 @@ class RequestRegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        val email = findViewById<EditText>(R.id.etEmail).text.toString()
-        val password = findViewById<EditText>(R.id.etPassword).text.toString()
-        val name = findViewById<EditText>(R.id.etName).text.toString()
-        val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword).text.toString()
-        val mobile = findViewById<EditText>(R.id.etMobile).text.toString()
+        val email = findViewById<EditText>(R.id.etEmail)
+        val password = findViewById<EditText>(R.id.etPassword)
+        val name = findViewById<EditText>(R.id.etName)
+        val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
+        val mobile = findViewById<EditText>(R.id.etMobile)
 
 
 
@@ -36,11 +36,17 @@ class RequestRegisterActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
 
-            if (password == etConfirmPassword) {
+            val etEmail=email.text.toString()
+            val etName=name.text.toString()
+            val etPassword=password.text.toString()
+            val etConfirmPassword=etConfirmPassword.text.toString()
+            val etMobile=mobile.text.toString()
 
-                if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && etConfirmPassword.isNotEmpty() && mobile.isNotEmpty()) {
+            if (etPassword == etConfirmPassword) {
 
-                    auth.createUserWithEmailAndPassword(email, password)
+                if (etEmail.isNotEmpty() && etPassword.isNotEmpty() && etName.isNotEmpty() && etConfirmPassword.isNotEmpty() && etMobile.isNotEmpty()) {
+
+                    auth.createUserWithEmailAndPassword(etEmail, etPassword)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 val uid = auth.currentUser?.uid!!

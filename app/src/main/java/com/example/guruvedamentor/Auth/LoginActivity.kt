@@ -27,8 +27,8 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         val btnLogin = findViewById<AppCompatButton>(R.id.btnLogin)
-        val email = findViewById<EditText>(R.id.etEmailLogin).text.toString()
-        val password = findViewById<EditText>(R.id.etPasswordLogin).text.toString()
+        val email = findViewById<EditText>(R.id.etEmailLogin)
+        val password = findViewById<EditText>(R.id.etPasswordLogin)
         val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
         val tvSignupNow = findViewById<TextView>(R.id.tvSignupNow)
 
@@ -53,9 +53,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
-            if (dbEmail == email && dbPassword == password) {
-                if (email.isNotEmpty() && password.isNotEmpty()) {
-                    auth.signInWithEmailAndPassword(email, password)
+            val etEmail=email.text.toString()
+            val etPassword=password.text.toString()
+            if (dbEmail == etEmail && dbPassword == etPassword) {
+                if (etEmail.isNotEmpty() && etPassword.isNotEmpty()) {
+                    auth.signInWithEmailAndPassword(etEmail, etPassword)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 val uid = auth.currentUser?.uid!!
