@@ -36,7 +36,7 @@ class RequestRegisterActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
 
-            if (password != etConfirmPassword) {
+            if (password == etConfirmPassword) {
 
                 if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && etConfirmPassword.isNotEmpty() && mobile.isNotEmpty()) {
 
