@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Fragments.HomeFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="22dp"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="100dp"
+            app:cardBackgroundColor="@color/white"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GuruVeda Mentor"
+            android:fontFamily="@font/inria_sans_bold"
+            android:textColor="@color/orange"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/notification"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/notification_icon"
+            android:layout_marginLeft="98dp"
+            />
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/profile_icon"
+            android:layout_marginLeft="15dp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardSlide"
+        android:layout_width="360dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        >
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_slider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:iss_auto_cycle="true"
+            app:iss_delay="2000"
+            app:iss_period="2000"
+            app:iss_text_align="CENTER" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quick Access"
+            android:textSize="18dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/myBatches"
+                android:layout_width="118dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="#D0FAF8"
+                app:cardElevation="10dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logo"
+                        />
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="My Batches"
+                            android:layout_marginLeft="2dp"
+                            />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+             <androidx.cardview.widget.CardView
+                 android:id="@+id/manageTests"
+                android:layout_width="118dp"
+                android:layout_height="50dp"
+                 app:cardCornerRadius="10dp"
+                 android:layout_marginLeft="5dp"
+                android:backgroundTint="#FFD9CD">
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center"
+                     android:orientation="horizontal">
+
+                     <ImageView
+                         android:layout_width="20dp"
+                         android:layout_height="match_parent"
+                         android:src="@drawable/logo"
+                         />
+
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical">
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Manage"
+                             android:layout_gravity="center"
+                             android:layout_marginLeft="2dp"
+                             />
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Tests"
+                             android:layout_gravity="center"
+                             android:layout_marginLeft="2dp"
+                             />
+
+                     </LinearLayout>
+
+                 </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+             <androidx.cardview.widget.CardView
+                 android:id="@+id/studyMaterial"
+                android:layout_width="118dp"
+                android:layout_height="50dp"
+                 app:cardCornerRadius="10dp"
+                 android:layout_marginLeft="5dp"
+                android:backgroundTint="#FFEFD0">
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center"
+                     android:orientation="horizontal">
+
+                     <ImageView
+                         android:layout_width="20dp"
+                         android:layout_height="match_parent"
+                         android:src="@drawable/logo"
+                         />
+
+
+
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical">
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Study"
+                             android:layout_gravity="center"
+                             android:layout_marginLeft="2dp"
+                             />
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Material"
+                             android:layout_gravity="center"
+                             android:layout_marginLeft="2dp"
+                             />
+
+                     </LinearLayout>
+
+
+                 </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/liveBatches"
+                android:layout_width="118dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="#D0FAF8"
+                app:cardElevation="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logo"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Live"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="2dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Batches"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="2dp"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recordedBatches"
+                android:layout_width="118dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="#FFD9CD">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logo"
+                        />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recorded"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="2dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Batches"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="2dp"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/lectureVideos"
+                android:layout_width="118dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="#FFEFD0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logo"
+                        />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lecture"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="2dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Videos"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="2dp"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recommended Courses"
+                android:textSize="18dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendedRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Free Videos"
+                android:textSize="18dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/freeVideosRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

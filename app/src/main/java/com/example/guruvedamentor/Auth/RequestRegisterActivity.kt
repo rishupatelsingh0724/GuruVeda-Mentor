@@ -31,65 +31,78 @@ class RequestRegisterActivity : AppCompatActivity() {
         val mobile = findViewById<EditText>(R.id.etMobile)
 
 
-
         val btnRegister = findViewById<AppCompatButton>(R.id.btnRegister)
 
         btnRegister.setOnClickListener {
 
-            val etEmail=email.text.toString()
-            val etName=name.text.toString()
-            val etPassword=password.text.toString()
-            val etConfirmPassword=etConfirmPassword.text.toString()
-            val etMobile=mobile.text.toString()
 
-            if (etPassword == etConfirmPassword) {
 
-                if (etEmail.isNotEmpty() && etPassword.isNotEmpty() && etName.isNotEmpty() && etConfirmPassword.isNotEmpty() && etMobile.isNotEmpty()) {
 
-                    auth.createUserWithEmailAndPassword(etEmail, etPassword)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val uid = auth.currentUser?.uid!!
-                                val teacher = hashMapOf(
-                                    "teacherName" to name,
-                                    "teacherEmail" to email,
-                                    "teacherMobile" to mobile,
-                                    "teacherPassword" to password,
-                                    "teacherStatus" to "pending",  // Default status
-                                    "teacherUid" to uid
-                                )
-                                db.collection("teachers").document(uid)
-                                    .set(teacher)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(
-                                            this,
-                                            "Registered! Waiting for approval.",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                        auth.signOut()
-                                        finish()
+                val etEmail = email.text.toString()
+                val etName = name.text.toString()
+                val etPassword = password.text.toString()
+                val etConfirmPassword = etConfirmPassword.text.toString()
+                val etMobile = mobile.text.toString()
+
+
+                if (etPassword == etConfirmPassword) {
+
+                    if (etEmail.isNotEmpty() && etPassword.isNotEmpty() && etName.isNotEmpty() && etConfirmPassword.isNotEmpty() && etMobile.isNotEmpty()) {
+
+                        auth.createUserWithEmailAndPassword(etEmail, etPassword)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val uid = auth.currentUser?.uid.toString()
+                                    if (uid != null) {
+                                    val teacher = hashMapOf(
+                                        "teacherUid" to uid,
+                                        "teacherName" to etName,
+                                        "teacherEmail" to etEmail,
+                                        "teacherMobile" to etMobile,
+                                        "teacherPassword" to etPassword,
+                                        "teacherImage" to "",
+                                        "teacherStatus" to "pending"  // Default status
+
+                                    )
+                                    db.collection("teachers").document(uid)
+                                        .set(teacher)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                this,
+                                                "Registered! Waiting for approval.",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Toast.makeText(
+                                                this,
+                                                "Error: ${e.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    } else {
+                                        Toast.makeText(this, "User ID is null!", Toast.LENGTH_SHORT).show()
                                     }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(
-                                            this,
-                                            "Error: ${e.message}",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                            } else {
-                                Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT)
-                                    .show()
+                                } else {
+                                    Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
                             }
-                        }
+                    } else {
+                        Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show()
+                    }
+
                 } else {
-                    Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Password and confirm password do not match!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
-            }else{
-                Toast.makeText(this, "Password and confirm password do not match!", Toast.LENGTH_SHORT).show()
-            }
+
+
         }
-
-
     }
 }

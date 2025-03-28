@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.example.guruvedamentor.MainActivity
 import com.example.guruvedamentor.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,8 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseFirestore.getInstance()
-    var dbEmail: String? = null
-    var dbPassword: String? = null
+      var dbEmail: String?=null
+      var dbPassword: String?=null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,38 +41,29 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RequestRegisterActivity::class.java))
         }
 
-        db.collection("teachers").document(auth.currentUser!!.uid).get()
-            .addOnSuccessListener { result ->
-                if (result.exists()) {
-                    dbEmail = result.getString("teacherEmail")
-                    dbPassword = result.getString("teacherPassword")
-                }
-            }
-
-
-
-
 
         btnLogin.setOnClickListener {
             val etEmail=email.text.toString()
             val etPassword=password.text.toString()
-            if (dbEmail == etEmail && dbPassword == etPassword) {
-                if (etEmail.isNotEmpty() && etPassword.isNotEmpty()) {
-                    auth.signInWithEmailAndPassword(etEmail, etPassword)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val uid = auth.currentUser?.uid!!
-                                checkApprovalStatus(uid)
-                            } else {
-                                Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
-                            }
+
+            if (etEmail.isNotEmpty() && etPassword.isNotEmpty()) {
+
+                auth.signInWithEmailAndPassword(etEmail, etPassword)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val uid = auth.currentUser?.uid!!
+                            checkApprovalStatus(uid)
+                        } else {
+                            Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
                         }
-                } else {
-                    Toast.makeText(this, "Enter email and password!", Toast.LENGTH_SHORT).show()
-                }
+                    }
+//                } else {
+//                    Toast.makeText(this, "No approval status found. Waiting for approval", Toast.LENGTH_SHORT).show()
+//                }
             } else {
-                Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Enter email and password!", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 
@@ -81,14 +73,15 @@ class LoginActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val status = document.getString("status")
+                    val status = document.getString("teacherStatus")
+                    dbEmail = document.getString("teacherEmail")
+                    dbPassword = document.getString("teacherPassword")
                     if (status == "approved") {
                         Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, LoginActivity::class.java))
+                        startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Approval Pending. Please wait!", Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(this, "Approval Pending. Please wait!", Toast.LENGTH_LONG).show()
                         auth.signOut()
                     }
                 } else {
