@@ -22,8 +22,23 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val view=inflater.inflate(R.layout.fragment_home, container, false)
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+
+
 
         val imageSlider = view.findViewById<ImageSlider>(R.id.image_slider)
 
@@ -33,6 +48,7 @@ class HomeFragment : Fragment() {
         imageList.add(SlideModel(R.drawable.offer_banner_3, ScaleTypes.FIT))
         imageList.add(SlideModel(R.drawable.offer_banner_2, ScaleTypes.FIT))
         imageSlider.setImageList(imageList)
+
 
         return view
     }

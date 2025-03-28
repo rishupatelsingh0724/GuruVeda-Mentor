@@ -24,6 +24,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         db = FirebaseFirestore.getInstance()
         Handler(Looper.getMainLooper()).postDelayed({
+            if (auth.currentUser != null) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
             checkUserStatus()
         }, 1000)
     }

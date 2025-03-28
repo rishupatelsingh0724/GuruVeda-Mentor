@@ -1,14 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ProfileFragment">
+    android:orientation="vertical"
+    tools:context=".Fragments.Profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="230dp"
+        android:background="@drawable/card_coner_radius">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#59A2E2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/back_arrow"
+                        tools:ignore="RtlHardcoded" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="Profile"
+                        android:textColor="@color/white"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/teacherProfileImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/profile_icon" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/teacherProfileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Name"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/teacherProfileNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Phone"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/teacherProfileEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Email"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="160dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_button_bg"
+                    android:drawableRight="@drawable/baseline_edit_square_24"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:text="Edit"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/darker_gray"
+        android:backgroundTint="#EEF5FF"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:backgroundTint="#EEF5FF"
+            android:drawableLeft="@drawable/courses_icon"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="My Classes"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#EEF5FF"
+            android:drawableLeft="@drawable/terms_and_conditions"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="Terms &amp; Conditions"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#EEF5FF"
+            android:drawableLeft="@drawable/help_and_suport"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="Help &amp; Support"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#EEF5FF"
+            android:drawableLeft="@drawable/test_icon"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="Manage Test"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#EEF5FF"
+            android:drawableLeft="@drawable/resource"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="Resources"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#EEF5FF"
+            android:drawableLeft="@drawable/log_out"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="Logout"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
+
+    <!--    &lt;!&ndash; FAQ Section with Border &ndash;&gt;-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@drawable/border_box"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="FAQ’s"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:drawableLeft="@drawable/baseline_file_download_24"-->
+    <!--            android:drawablePadding="8dp"/>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Terms &amp; Conditions"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:drawableLeft="@drawable/baseline_file_download_24"-->
+    <!--            android:drawablePadding="8dp"/>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Share Application"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:drawableLeft="@drawable/baseline_file_download_24"-->
+    <!--            android:drawablePadding="8dp"/>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Help &amp; Support"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:drawableLeft="@drawable/baseline_file_download_24"-->
+    <!--            android:drawablePadding="8dp"/>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Delete Account"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:drawableLeft="@drawable/baseline_file_download_24"-->
+    <!--            android:drawablePadding="8dp"/>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Logout"-->
+    <!--            android:textColor="@android:color/black"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:drawableLeft="@drawable/baseline_file_download_24"-->
+    <!--            android:drawablePadding="8dp"/>-->
+    <!--    </LinearLayout>-->
+
+
+</LinearLayout>
