@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.example.guruvedamentor.MainActivity
 import com.example.guruvedamentor.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,8 +28,8 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         val btnLogin = findViewById<AppCompatButton>(R.id.btnLogin)
-        val email = findViewById<EditText>(R.id.etEmailLogin).text.toString()
-        val password = findViewById<EditText>(R.id.etPasswordLogin).text.toString()
+        val email = findViewById<EditText>(R.id.etEmailLogin)
+        val password = findViewById<EditText>(R.id.etPasswordLogin)
         val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
         val tvSignupNow = findViewById<TextView>(R.id.tvSignupNow)
 
@@ -42,10 +43,12 @@ class LoginActivity : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
+            val etEmail=email.text.toString()
+            val etPassword=password.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                if (dbEmail == email && dbPassword == password) {
-                auth.signInWithEmailAndPassword(email, password)
+            if (etEmail.isNotEmpty() && etPassword.isNotEmpty()) {
+
+                auth.signInWithEmailAndPassword(etEmail, etPassword)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val uid = auth.currentUser?.uid!!
@@ -54,9 +57,9 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
                         }
                     }
-                } else {
-                    Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_SHORT).show()
-                }
+//                } else {
+//                    Toast.makeText(this, "No approval status found. Waiting for approval", Toast.LENGTH_SHORT).show()
+//                }
             } else {
                 Toast.makeText(this, "Enter email and password!", Toast.LENGTH_SHORT).show()
             }
@@ -75,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                     dbPassword = document.getString("teacherPassword")
                     if (status == "approved") {
                         Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, LoginActivity::class.java))
+                        startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
                         Toast.makeText(this, "Approval Pending. Please wait!", Toast.LENGTH_LONG).show()

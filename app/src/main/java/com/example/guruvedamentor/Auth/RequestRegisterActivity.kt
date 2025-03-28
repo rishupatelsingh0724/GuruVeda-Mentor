@@ -24,66 +24,85 @@ class RequestRegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        val email = findViewById<EditText>(R.id.etEmail).text.toString()
-        val password = findViewById<EditText>(R.id.etPassword).text.toString()
-        val name = findViewById<EditText>(R.id.etName).text.toString()
-        val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword).text.toString()
-        val mobile = findViewById<EditText>(R.id.etMobile).text.toString()
-
+        val email = findViewById<EditText>(R.id.etEmail)
+        val password = findViewById<EditText>(R.id.etPassword)
+        val name = findViewById<EditText>(R.id.etName)
+        val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
+        val mobile = findViewById<EditText>(R.id.etMobile)
 
 
         val btnRegister = findViewById<AppCompatButton>(R.id.btnRegister)
 
         btnRegister.setOnClickListener {
 
-            if (password == etConfirmPassword) {
 
-                if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && etConfirmPassword.isNotEmpty() && mobile.isNotEmpty()) {
 
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val uid = auth.currentUser?.uid!!
-                                val teacher = hashMapOf(
-                                    "teacherName" to name,
-                                    "teacherEmail" to email,
-                                    "teacherMobile" to mobile,
-                                    "teacherPassword" to password,
-                                    "teacherStatus" to "pending",  // Default status
-                                    "teacherUid" to uid
-                                )
-                                db.collection("teachers").document(uid)
-                                    .set(teacher)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(
-                                            this,
-                                            "Registered! Waiting for approval.",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                        auth.signOut()
-                                        finish() // Registration ke baad exit kar rahe hai
+
+                val etEmail = email.text.toString()
+                val etName = name.text.toString()
+                val etPassword = password.text.toString()
+                val etConfirmPassword = etConfirmPassword.text.toString()
+                val etMobile = mobile.text.toString()
+
+
+                if (etPassword == etConfirmPassword) {
+
+                    if (etEmail.isNotEmpty() && etPassword.isNotEmpty() && etName.isNotEmpty() && etConfirmPassword.isNotEmpty() && etMobile.isNotEmpty()) {
+
+                        auth.createUserWithEmailAndPassword(etEmail, etPassword)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val uid = auth.currentUser?.uid.toString()
+                                    if (uid != null) {
+                                    val teacher = hashMapOf(
+                                        "teacherUid" to uid,
+                                        "teacherName" to etName,
+                                        "teacherEmail" to etEmail,
+                                        "teacherMobile" to etMobile,
+                                        "teacherPassword" to etPassword,
+                                        "teacherImage" to "",
+                                        "teacherStatus" to "pending"  // Default status
+
+                                    )
+                                    db.collection("teachers").document(uid)
+                                        .set(teacher)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                this,
+                                                "Registered! Waiting for approval.",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Toast.makeText(
+                                                this,
+                                                "Error: ${e.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    } else {
+                                        Toast.makeText(this, "User ID is null!", Toast.LENGTH_SHORT).show()
                                     }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(
-                                            this,
-                                            "Error: ${e.message}",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                            } else {
-                                Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT)
-                                    .show()
+                                } else {
+                                    Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
                             }
-                        }
+                    } else {
+                        Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show()
+                    }
+
                 } else {
-                    Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Password and confirm password do not match!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
-            }else{
-                Toast.makeText(this, "Password and confirm password do not match!", Toast.LENGTH_SHORT).show()
-            }
+
+
         }
-
-
     }
 }
