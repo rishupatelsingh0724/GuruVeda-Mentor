@@ -110,7 +110,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
-                        android:src="@drawable/logo"
+                        android:src="@drawable/all_courses"
                         />
 
 
@@ -142,7 +142,7 @@
                      <ImageView
                          android:layout_width="20dp"
                          android:layout_height="match_parent"
-                         android:src="@drawable/logo"
+                         android:src="@drawable/test_img"
                          />
 
                      <LinearLayout
@@ -187,7 +187,7 @@
                      <ImageView
                          android:layout_width="20dp"
                          android:layout_height="match_parent"
-                         android:src="@drawable/logo"
+                         android:src="@drawable/img"
                          />
 
 
