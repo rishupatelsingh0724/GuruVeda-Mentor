@@ -6,10 +6,11 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
         tools:ignore="SelectedPhotoAccess" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GuruVedaMentor"
         tools:targetApi="31">
+        <activity
+            android:name=".View.ShowCourseDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.AddCoursesActivity"
+            android:exported="false" />
         <activity
             android:name=".Fragments.Profile.UpdateProfileActivity"
             android:exported="false" />

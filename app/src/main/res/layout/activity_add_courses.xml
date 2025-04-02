@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="40dp"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".View.AddCoursesActivity">
+
+    <!-- Course Title -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editCourseTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Course Title"
+            android:inputType="text"
+            android:padding="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Course Description -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editCourseDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Course Description"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:padding="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Video Count -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editVideoCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Video Count"
+            android:inputType="number"
+            android:padding="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Course Price -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editCoursePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Course Price"
+            android:inputType="numberDecimal"
+            android:padding="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Course Thumbnail (Image Upload) -->
+    <ImageView
+        android:id="@+id/imageCourseThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Course Thumbnail"
+        android:scaleType="centerCrop"
+        android:src="@drawable/live_video_image" />
+
+    <!-- Button to choose Image -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnChooseImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_button"
+        android:text="Choose Thumbnail"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <!-- Save Course Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSaveCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:text="Save Course"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</LinearLayout>

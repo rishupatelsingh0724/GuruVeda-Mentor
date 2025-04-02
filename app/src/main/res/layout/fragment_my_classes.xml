@@ -1,41 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:layout_margin="20dp"
     tools:context=".Fragments.MyClassesFragment">
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="25dp"
-        app:cardCornerRadius="20dp"
-        >
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="10dp"-->
+    <!--        android:layout_marginTop="25dp"-->
+    <!--        app:cardCornerRadius="20dp"-->
+    <!--        >-->
 
 
-    <!-- TabLayout for switching tabs -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:tabGravity="fill"
-        app:tabMode="fixed" />
+    <!--    &lt;!&ndash; TabLayout for switching tabs &ndash;&gt;-->
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/white"-->
+    <!--        app:tabGravity="fill"-->
+    <!--        app:tabMode="fixed" />-->
 
-    </androidx.cardview.widget.CardView>
+    <!--    </androidx.cardview.widget.CardView>-->
 
-    <!-- ViewPager2 for fragment pages -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    <!--    &lt;!&ndash; ViewPager2 for fragment pages &ndash;&gt;-->
+    <!--    <androidx.viewpager2.widget.ViewPager2-->
+    <!--        android:id="@+id/viewPager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_weight="1" />-->
 
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addCourses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="30dp"
+            android:src="@drawable/baseline_add_24"
+            tools:ignore="ContentDescription" />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/courseRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/my_courses_adapter_desing" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
