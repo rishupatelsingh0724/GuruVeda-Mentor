@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/test_subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Test Subject"
+                        android:textSize="22dp" />
+
+                    <TextView
+                        android:id="@+id/test_tittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Test Tittle"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/test_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Test Description"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/test_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Test Duration"
+                        android:textSize="16dp" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/add_questions"
+                    android:layout_width="110dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/add_questions"
+                    android:gravity="center"
+                    android:text="Add Questions"
+                    android:textSize="15dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/test_edit"
+                    android:layout_width="45dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/add_questions"
+                    android:gravity="center"
+                    android:text="Edit"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/test_all_students"
+                    android:layout_width="95dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/add_questions"
+                    android:gravity="center"
+                    android:text="All Students"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/test_questions"
+                    android:layout_width="85dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/add_questions"
+                    android:gravity="center"
+                    android:text="Questions"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/test_delete"
+                    android:layout_width="60dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/add_questions"
+                    android:gravity="center"
+                    android:text="Delete"
+                    android:textSize="15dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
