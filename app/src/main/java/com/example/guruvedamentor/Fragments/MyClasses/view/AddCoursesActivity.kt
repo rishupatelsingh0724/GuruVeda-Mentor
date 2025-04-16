@@ -1,4 +1,4 @@
-package com.example.guruvedamentor.View
+package com.example.guruvedamentor.Fragments.MyClasses.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.example.guruvedamentor.databinding.ActivityAddCoursesBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.util.UUID
@@ -20,8 +19,8 @@ import java.util.UUID
 class AddCoursesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddCoursesBinding
     private var imageUri: Uri? = null
-    lateinit var firebaseDB: FirebaseStorage
-    lateinit var realtimeDB: FirebaseDatabase
+    lateinit var fireStorageDB: FirebaseStorage
+    lateinit var firebaseDB: FirebaseFirestore
     lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +28,8 @@ class AddCoursesActivity : AppCompatActivity() {
         binding = ActivityAddCoursesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseDB = FirebaseStorage.getInstance()
-        realtimeDB = FirebaseDatabase.getInstance()
+        fireStorageDB = FirebaseStorage.getInstance()
+        firebaseDB = FirebaseFirestore.getInstance()
         firebaseAuth = FirebaseAuth.getInstance()
 
         val chooseImage = binding.btnChooseImage
@@ -104,7 +103,7 @@ class AddCoursesActivity : AppCompatActivity() {
             "coursePrice" to coursePrice,
             "courseThumbnail" to uri
         )
-        realtimeDB.getReference("courses").child(courseId).setValue(data).addOnSuccessListener {
+        firebaseDB.collection("courses").document(courseId).set(data).addOnSuccessListener {
             Toast.makeText(this, "Course Saved Successfully", Toast.LENGTH_SHORT).show()
             finish()
         }.addOnFailureListener {
@@ -113,7 +112,7 @@ class AddCoursesActivity : AppCompatActivity() {
 
     }
     private fun uploadImage(uri: Uri) {
-        val storageRef = firebaseDB.reference.child("courses/${UUID.randomUUID()}.jpg")
+        val storageRef = fireStorageDB.reference.child("courses/${UUID.randomUUID()}.jpg")
         storageRef.putFile(uri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 saveCourse(uri.toString())

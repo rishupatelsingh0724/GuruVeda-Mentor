@@ -1,4 +1,4 @@
-package com.example.guruvedamentor.DataModels
+package com.example.guruvedamentor.Fragments.MyClasses.DataModel
 
 data class CourseDataModel(
     val courseId: String? = null,
@@ -9,4 +9,13 @@ data class CourseDataModel(
     val teacherName: String? = null,
     val courseDescription: String? = null,
     val courseThumbnail: String? = null
+)
+
+data class VideoDataModel(
+    val id: String? = "",
+    val title: String? = "",
+    val description: String? = "",
+    val videoUrl: String? = "",
+    val type : String? = "",
+    val duration : String? = ""
 )

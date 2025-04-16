@@ -10,15 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guruvedamentor.Adapters.CoursesAdapter
-import com.example.guruvedamentor.DataModels.CourseDataModel
+import com.example.guruvedamentor.Fragments.MyClasses.Adapter.CoursesAdapter
+import com.example.guruvedamentor.Fragments.MyClasses.DataModel.CourseDataModel
 import com.example.guruvedamentor.R
-import com.example.guruvedamentor.View.AddCoursesActivity
+import com.example.guruvedamentor.Fragments.MyClasses.view.AddCoursesActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class MyClassesFragment : Fragment() {
@@ -27,7 +24,7 @@ class MyClassesFragment : Fragment() {
     private lateinit var courseAdapter: CoursesAdapter
     private lateinit var courseList: ArrayList<CourseDataModel>
 
-    lateinit var realtimeDB: FirebaseDatabase
+    lateinit var FirestoreDB: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +52,7 @@ class MyClassesFragment : Fragment() {
 //            }
 //        }.attach()
 
-        realtimeDB = FirebaseDatabase.getInstance()
+        FirestoreDB = FirebaseFirestore.getInstance()
         courseList = ArrayList()
 
         recyclerView = view.findViewById(R.id.courseRecyclerView)
@@ -81,26 +78,24 @@ class MyClassesFragment : Fragment() {
         return view
     }
 
-    fun fetchCourses(){
-        realtimeDB.reference.child("courses").addValueEventListener(object : ValueEventListener{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onDataChange(snapshot: DataSnapshot) {
-                courseList.clear()
-                for (data in snapshot.children){
-                    val course = data.getValue(CourseDataModel::class.java)
-                  if (course!=null){
-                      courseList.add(course)
+    @SuppressLint("NotifyDataSetChanged")
+    fun fetchCourses() {
+        val firestoreDB = FirebaseFirestore.getInstance()
 
-                  }
+        firestoreDB.collection("courses")
+            .get()
+            .addOnSuccessListener { result ->
+                courseList.clear()
+                for (document in result) {
+                    val course = document.toObject(CourseDataModel::class.java)
+                    courseList.add(course)
                 }
                 courseAdapter.notifyDataSetChanged()
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Failed to fetch courses", Toast.LENGTH_SHORT).show()
             }
-
-        })
     }
+
 
 }
