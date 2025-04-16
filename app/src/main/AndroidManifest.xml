@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
+        tools:ignore="SelectedPhotoAccess" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+
 
     <application
         android:allowBackup="true"
@@ -13,6 +27,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GuruVedaMentor"
         tools:targetApi="31">
+        <activity
+            android:name=".Fragments.MyClasses.view.AddNewCourseVideoAndUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.MyClasses.view.ShowCourseDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.MyClasses.view.AddCoursesActivity"
+            android:exported="false" />
         <activity
             android:name=".Fragments.Profile.UpdateProfileActivity"
             android:exported="false" />

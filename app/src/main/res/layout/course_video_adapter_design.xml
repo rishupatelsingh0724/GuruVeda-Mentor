@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- FrameLayout for Thumbnail + Duration + Type -->
+    <FrameLayout
+        android:layout_width="110dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="10dp">
+
+        <!-- Thumbnail Image -->
+        <ImageView
+            android:id="@+id/videoThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="Video Thumbnail"
+            tools:src="@drawable/live_video_image" />
+
+        <!-- Duration (bottom-end corner) -->
+        <TextView
+            android:id="@+id/videoDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="4dp"
+            android:background="#AA000000"
+            android:text="00:03"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:padding="2dp" />
+
+        <!-- Type (top-start corner) -->
+        <TextView
+            android:id="@+id/videoType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="4dp"
+            android:background="#AA000000"
+            android:text="Free"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:padding="2dp" />
+    </FrameLayout>
+
+    <!-- Vertical layout to hold course details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Course Title -->
+        <TextView
+            android:id="@+id/videoTitleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Course Name"
+            android:textSize="12sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:padding="2dp"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/videoDescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingTop="2dp"
+            android:text="Short description"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="11sp" />
+
+
+    </LinearLayout>
+
+    <!-- Three-dot icon (aligned with image height) -->
+    <ImageView
+        android:id="@+id/videoMoreOptions"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="top"
+        android:src="@drawable/three_dot"
+        android:tint="@android:color/darker_gray"
+        tools:ignore="UseAppTint" />
+</LinearLayout>
