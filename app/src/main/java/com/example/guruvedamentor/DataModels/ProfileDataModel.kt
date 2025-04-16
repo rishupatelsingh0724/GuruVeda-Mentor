@@ -1,4 +1,4 @@
-package com.example.guruvedamentor.DataClass
+package com.example.guruvedamentor.DataModels
 
 data class ProfileDataModel(
     val teacherName: String? = null,

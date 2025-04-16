@@ -2,7 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
+        tools:ignore="SelectedPhotoAccess" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
 
 
     <application
@@ -16,19 +28,13 @@
         android:theme="@style/Theme.GuruVedaMentor"
         tools:targetApi="31">
         <activity
-            android:name=".View.CourseDetailsActivity"
+            android:name=".Fragments.MyClasses.view.AddNewCourseVideoAndUpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".View.VideoDetailsActivity"
+            android:name=".Fragments.MyClasses.view.ShowCourseDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".View.QuestionsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.StudentsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.CreateTestActivity"
+            android:name=".Fragments.MyClasses.view.AddCoursesActivity"
             android:exported="false" />
         <activity
             android:name=".Fragments.Profile.UpdateProfileActivity"
