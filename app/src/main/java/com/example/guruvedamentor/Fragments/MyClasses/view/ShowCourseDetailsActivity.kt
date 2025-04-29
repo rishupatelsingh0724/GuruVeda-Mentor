@@ -30,7 +30,9 @@ class ShowCourseDetailsActivity : AppCompatActivity() {
         videoList = mutableListOf()
         recyclerView = binding.videoRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = AddCourseVideoAdapter(this, videoList, courseId)
+        adapter = AddCourseVideoAdapter(this, videoList, courseId,{ video ->
+            openVideoInPlayer(video)
+        })
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
@@ -47,6 +49,17 @@ class ShowCourseDetailsActivity : AppCompatActivity() {
             intent.putExtra("courseId", courseId)
             startActivity(intent)
         }
+        binding.btnPlayAll.setOnClickListener {
+            val intent = Intent(this, CourseVideoPlaygroundActivity::class.java).apply {
+                putExtra("courseId", courseId)
+                putExtra("videoUrl", videoList.first().videoUrl)
+                putExtra("videoTitle", videoList.first().title)
+                putExtra("videoDescription", videoList.first().description)
+                putExtra("videoDuration", videoList.first().duration)
+                putExtra("videoType", videoList.first().type)
+            }
+            startActivity(intent)
+        }
 
     }
 
@@ -57,7 +70,9 @@ class ShowCourseDetailsActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     fun fetchCourseVideos(courseId: String){
         val db = FirebaseFirestore.getInstance()
-        val videoCollection = db.collection("courses").document(courseId).collection("videos").orderBy("id",
+        val videoCollection = db.collection("videos")
+            .whereEqualTo("courseId", courseId)
+            .orderBy("id",
             Query.Direction.ASCENDING).limit(10)
         videoCollection.get().addOnSuccessListener { documents ->
             videoList.clear()
@@ -67,5 +82,17 @@ class ShowCourseDetailsActivity : AppCompatActivity() {
             }
             adapter.notifyDataSetChanged()
         }
+    }
+
+    fun openVideoInPlayer(video: VideoDataModel) {
+        val intent = Intent(this, CourseVideoPlaygroundActivity::class.java).apply {
+            putExtra("courseId", courseId)
+            putExtra("videoUrl", video.videoUrl)
+            putExtra("videoTitle", video.title)
+            putExtra("videoDescription", video.description)
+            putExtra("videoDuration", video.duration)
+            putExtra("videoType", video.type)
+        }
+        startActivity(intent)
     }
 }

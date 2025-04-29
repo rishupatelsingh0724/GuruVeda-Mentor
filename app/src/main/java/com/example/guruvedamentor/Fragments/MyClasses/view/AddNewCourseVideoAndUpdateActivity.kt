@@ -160,6 +160,7 @@ class AddNewCourseVideoAndUpdateActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun saveVideoDataToFirestore(
         title: String,
         description: String,
@@ -176,13 +177,14 @@ class AddNewCourseVideoAndUpdateActivity : AppCompatActivity() {
             "type" to type,
             "videoUrl" to videoUrl,
             "id" to videoId,
-            "duration" to duration
+            "duration" to duration,
+            "courseId" to courseId
         )
 
-        firestore
-            .collection("courses")
-            .document(courseId)
-            .collection("videos")
+//        firestore
+//            .collection("courses")
+//            .document(courseId)
+            firestore.collection("videos")
             .document(videoId)
             .set(videoData)
             .addOnSuccessListener { documentReference ->
@@ -267,10 +269,7 @@ class AddNewCourseVideoAndUpdateActivity : AppCompatActivity() {
         }
         
 
-        firestore
-            .collection("courses")
-            .document(courseId)
-            .collection("videos")
+        firestore.collection("videos")
             .document(videoId).update(videoData)
             .addOnSuccessListener {
             Toast.makeText(this, "Video Updated Successfully", Toast.LENGTH_SHORT).show()

@@ -10,12 +10,12 @@
     <uses-permission
         android:name="android.permission.READ_MEDIA_IMAGES"
         tools:ignore="SelectedPhotoAccess" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +27,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GuruVedaMentor"
         tools:targetApi="31">
+        <activity
+            android:name=".Fragments.Home.View.LiveClassesPlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.Home.View.LiveClassesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.MyClasses.view.CourseVideoPlaygroundActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".View.QuestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.VideoDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.CourseDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".Fragments.MyClasses.view.AddNewCourseVideoAndUpdateActivity"
             android:exported="false" />

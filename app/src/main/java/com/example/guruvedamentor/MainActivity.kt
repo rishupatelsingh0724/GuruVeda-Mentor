@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.guruvedamentor.Fragments.HomeFragment
+import com.example.guruvedamentor.Fragments.Home.View.HomeFragment
 import com.example.guruvedamentor.Fragments.ManageTestsFragment
 import com.example.guruvedamentor.Fragments.MyClassesFragment
 import com.example.guruvedamentor.Fragments.Profile.ProfileFragment

@@ -1,5 +1,6 @@
 package com.example.guruvedamentor.Fragments.MyClasses.Adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
+import androidx.media3.common.MediaItem
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guruvedamentor.Fragments.MyClasses.DataModel.VideoDataModel
 import com.example.guruvedamentor.Fragments.MyClasses.view.AddNewCourseVideoAndUpdateActivity
@@ -19,7 +21,7 @@ import com.example.guruvedamentor.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
-class AddCourseVideoAdapter(private val context: Context,private val videoList: MutableList<VideoDataModel>,private val courseId: String):RecyclerView.Adapter<AddCourseVideoAdapter.AddCourseVideoViewHolder>() {
+class AddCourseVideoAdapter(private val context: Context,private val videoList: MutableList<VideoDataModel,>,private val courseId: String, private val clickListener: (VideoDataModel) -> Unit):RecyclerView.Adapter<AddCourseVideoAdapter.AddCourseVideoViewHolder>() {
     class AddCourseVideoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val videoThumbnail: ImageView = itemView.findViewById(R.id.videoThumbnail)
         val videoDuration: TextView = itemView.findViewById(R.id.videoDuration)
@@ -28,6 +30,9 @@ class AddCourseVideoAdapter(private val context: Context,private val videoList: 
         val videoType : TextView = itemView.findViewById(R.id.videoType)
         val moreOption: ImageView = itemView.findViewById(R.id.videoMoreOptions)
     }
+
+    var playingPosition = -1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddCourseVideoViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.course_video_adapter_design, parent, false)
         return AddCourseVideoViewHolder(view)
@@ -37,6 +42,7 @@ class AddCourseVideoAdapter(private val context: Context,private val videoList: 
        return videoList.size
     }
     
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: AddCourseVideoViewHolder, position: Int) {
         val video = videoList[position]
         holder.videoTitle.text = video.title
@@ -45,6 +51,14 @@ class AddCourseVideoAdapter(private val context: Context,private val videoList: 
         holder.videoType.text = video.type
         holder.videoThumbnail.setImageResource(R.drawable.please_wait)
         getThumbnailFromVideoUrl(video.videoUrl.toString(),holder.videoThumbnail)
+
+
+
+        holder.itemView.setOnClickListener {
+            playingPosition = position
+            clickListener(video)
+        }
+
 
         holder.moreOption.setOnClickListener {
             val popupMenu = android.widget.PopupMenu(context, holder.moreOption)
@@ -99,8 +113,6 @@ class AddCourseVideoAdapter(private val context: Context,private val videoList: 
         val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(videoUrl)
         storageRef.delete().addOnSuccessListener {
             FirebaseFirestore.getInstance()
-                .collection("courses")
-                .document(courseId)
                 .collection("videos")
                 .document(videoId)
                 .delete()
@@ -128,6 +140,5 @@ class AddCourseVideoAdapter(private val context: Context,private val videoList: 
 
         alertDialog.show()
     }
-
 
 }

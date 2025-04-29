@@ -30,6 +30,13 @@ android {
             )
         }
     }
+    packagingOptions {
+        exclude ("META-INF/DEPENDENCIES")
+        exclude ( "META-INF/LICENSE")
+        exclude ("META-INF/LICENSE.txt")
+        exclude ("META-INF/NOTICE")
+        exclude ("META-INF/NOTICE.txt")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -56,12 +63,23 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation (libs.kotlin.stdlib)
+    implementation(libs.kotlin.stdlib)
 
-    implementation (libs.glide)
+    implementation(libs.glide)
 
-    implementation (libs.imageslideshow)
-    implementation (libs.androidx.media3.exoplayer)
-    implementation (libs.androidx.media3.ui)
+    implementation(libs.imageslideshow)
+    implementation("androidx.media3:media3-exoplayer:1.6.1")
+    implementation("androidx.media3:media3-ui:1.6.1")
+
+
+    //live video
+
+
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.api-client:google-api-client-android:1.34.0")
+    implementation("com.google.apis:google-api-services-youtube:v3-rev222-1.25.0")
+    implementation("com.google.oauth-client:google-oauth-client-jetty:1.34.0")
+    implementation("com.google.http-client:google-http-client-gson:1.42.3")
+
 
 }

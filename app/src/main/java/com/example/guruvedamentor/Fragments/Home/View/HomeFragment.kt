@@ -1,13 +1,15 @@
-package com.example.guruvedamentor.Fragments
+package com.example.guruvedamentor.Fragments.Home.View
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
@@ -19,19 +21,18 @@ import com.example.guruvedamentor.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class HomeFragment : Fragment() {
 
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
-    lateinit var recommendedCourses:RecyclerView
-    lateinit var myCourses:CardView
-    lateinit var manageTests:CardView
-    lateinit var studyMaterial:CardView
-    lateinit var liveBatches:CardView
-    lateinit var recordedBatches:CardView
-    lateinit var lectureVideos:CardView
-    lateinit var freeVideos:RecyclerView
+    lateinit var recommendedCourses: RecyclerView
+    lateinit var myCourses: CardView
+    lateinit var manageTests: CardView
+    lateinit var studyMaterial: CardView
+    lateinit var liveBatches: CardView
+    lateinit var recordedBatches: CardView
+    lateinit var lectureVideos: CardView
+    lateinit var freeVideos: RecyclerView
     lateinit var myCoursesAdapter: RecommendedCoursesAdapter
     lateinit var myCoursesList:ArrayList<CourseDataModel>
 
@@ -62,10 +63,12 @@ class HomeFragment : Fragment() {
         lectureVideos=view.findViewById(R.id.lectureVideos)
         freeVideos=view.findViewById(R.id.freeVideosRecyclerView)
 
-        recommendedCourses.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        recommendedCourses.layoutManager=
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         recommendedCourses.adapter = myCoursesAdapter
 
-        freeVideos.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        freeVideos.layoutManager=
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
 
 
@@ -81,6 +84,11 @@ class HomeFragment : Fragment() {
 
         getRecommendedCourses()
 
+
+        val liveClasses = view.findViewById<LinearLayout>(R.id.liveClasses)
+            liveClasses.setOnClickListener {
+                startActivity(Intent(requireContext(), LiveClassesActivity::class.java))
+            }
 
         return view
     }

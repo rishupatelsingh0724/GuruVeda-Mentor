@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".Fragments.HomeFragment">
+    tools:context=".Fragments.Home.View.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -259,6 +259,7 @@
                         />
 
                     <LinearLayout
+                        android:id="@+id/liveClasses"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
