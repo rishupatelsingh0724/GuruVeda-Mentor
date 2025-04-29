@@ -45,12 +45,13 @@ class CreateTestActivity : AppCompatActivity() {
 
             val testData = hashMapOf(
                 "testId" to testId,
+                "teacherId" to userId,
                 "testTitle" to testTitle,
                 "testSubject" to testSubject,
                 "testDescription" to testDescription,
                 "timeDuration" to timeLimit
             )
-            db.collection("teacher_tests_schedule").document(userId).set(testData)
+            db.collection("teacher_tests_schedule").document(testId).set(testData)
                 .addOnSuccessListener {
 
                     Toast.makeText(this, "Test created successfully!", Toast.LENGTH_SHORT).show()

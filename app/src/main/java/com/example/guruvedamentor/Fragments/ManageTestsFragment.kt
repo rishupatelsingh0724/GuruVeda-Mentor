@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guruvedamentor.Adapters.TeacherTestsSchedule
-import com.example.guruvedamentor.DataClass.TeacherTestScheduleDataModel
+import com.example.guruvedamentor.DataModel.TeacherTestScheduleDataModel
 import com.example.guruvedamentor.Interface.AddQuestionInterface
 import com.example.guruvedamentor.Interface.UpdateTestSchedule
 import com.example.guruvedamentor.R
@@ -65,7 +65,7 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
 
 
     fun getTestSchedule(){
-        db.collection("teacher_tests_schedule")
+        db.collection("teacher_tests_schedule").whereEqualTo("teacherId", userId)
             .get()
             .addOnSuccessListener { result ->
                 testScheduleList.clear()
@@ -135,7 +135,7 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
 
     @SuppressLint("MissingInflatedId")
     override fun updateTestSchedule(position: Int) {
-
+        val testItem = testScheduleList[position]
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.setTitle("Update Test Schedule")
         alertDialog.setMessage("Are you sure you want to update test schedule?")
@@ -159,14 +159,14 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
             val testSubject = editTextSubjects.text.toString()
 
             val questionMap = hashMapOf(
-                "testId" to userId,
+                "teacherId" to userId,
                 "testTitle" to testTitle,
                 "testSubject" to testSubject,
                 "testDescription" to testDescription,
                 "timeDuration" to timeDuration
             )
 
-            db.collection("teacher_tests_schedule").document(userId)
+            db.collection("teacher_tests_schedule").document(testItem.testId!!)
                 .update(questionMap as Map<String, Any>)
                 .addOnSuccessListener {
                     Toast.makeText(
@@ -188,11 +188,12 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
     }
 
     override fun deleteTestSchedule(position: Int) {
+        val testItem = testScheduleList[position]
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.setTitle("Delete Test Schedule")
         alertDialog.setMessage("Are you sure you want to delete test schedule?")
         alertDialog.setPositiveButton("Delete") { _, _ ->
-            db.collection("teacher_tests_schedule").document(userId)
+            db.collection("teacher_tests_schedule").document(testItem.testId!!)
                 .delete()
                 .addOnSuccessListener {
                     Toast.makeText(

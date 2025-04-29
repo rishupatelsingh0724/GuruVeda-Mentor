@@ -17,7 +17,7 @@
         >
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             app:cardCornerRadius="10dp"
             >
 
@@ -25,7 +25,7 @@
             <ImageView
                 android:id="@+id/courseImageView"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:scaleType="center"
                 />
 
@@ -46,18 +46,20 @@
             android:layout_marginTop="5dp"
             android:textSize="20dp"
             />
-        <TextView
-            android:id="@+id/courseDescriptionTV"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:textSize="16dp"
-            />
+
         <TextView
             android:id="@+id/coursePriceTV"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="16dp"
             />
+        <TextView
+            android:id="@+id/courseDescriptionTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            />
+
 
 
     </LinearLayout>

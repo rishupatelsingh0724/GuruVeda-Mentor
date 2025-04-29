@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guruvedamentor.DataClass.TeacherTestScheduleDataModel
+import com.example.guruvedamentor.DataModel.TeacherTestScheduleDataModel
 import com.example.guruvedamentor.Interface.AddQuestionInterface
 import com.example.guruvedamentor.Interface.UpdateTestSchedule
 import com.example.guruvedamentor.R

@@ -9,12 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guruvedamentor.Adapters.GetQuestionAdapter
-import com.example.guruvedamentor.DataClass.QuestionDataModel
+import com.example.guruvedamentor.DataModel.QuestionDataModel
 import com.example.guruvedamentor.Interface.OnQuestionItemClickListener
 import com.example.guruvedamentor.R
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class QuestionsActivity : AppCompatActivity(), OnQuestionItemClickListener {
     @SuppressLint("MissingInflatedId")
     lateinit var questionRecyclerView: RecyclerView
-    lateinit var questionList: ArrayList<QuestionDataModel>
+    lateinit var questionList: ArrayList< QuestionDataModel>
     lateinit var questionAdapter: GetQuestionAdapter
     lateinit var dp: FirebaseFirestore
     lateinit var menuImageView: ImageView
@@ -47,6 +45,7 @@ class QuestionsActivity : AppCompatActivity(), OnQuestionItemClickListener {
 
 
     }
+    @SuppressLint("NotifyDataSetChanged")
     fun getQuestions(){
         dp.collection("teacher_tests_question").get().addOnSuccessListener {
             questionList.clear()
@@ -55,7 +54,6 @@ class QuestionsActivity : AppCompatActivity(), OnQuestionItemClickListener {
                 questionList.add(question)
                 questionAdapter.notifyDataSetChanged()
             }
-
         }
     }
 

@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.guruvedamentor.DataClass.CourseDataModel
+import com.example.guruvedamentor.Fragments.MyClasses.DataModel.CourseDataModel
 import com.example.guruvedamentor.R
 import com.example.guruvedamentor.View.CourseDetailsActivity
 

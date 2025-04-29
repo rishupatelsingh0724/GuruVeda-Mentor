@@ -8,11 +8,11 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guruvedamentor.DataClass.QuestionDataModel
+import com.example.guruvedamentor.DataModel.QuestionDataModel
 import com.example.guruvedamentor.Interface.OnQuestionItemClickListener
 import com.example.guruvedamentor.R
 
-class GetQuestionAdapter(private val questionList: ArrayList<QuestionDataModel>,private val listener: OnQuestionItemClickListener):RecyclerView.Adapter<GetQuestionAdapter.QuestionViewHolder>() {
+class GetQuestionAdapter(private val questionList: ArrayList<QuestionDataModel>, private val listener: OnQuestionItemClickListener):RecyclerView.Adapter<GetQuestionAdapter.QuestionViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

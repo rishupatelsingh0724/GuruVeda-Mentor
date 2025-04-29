@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
-import com.example.guruvedamentor.DataClass.VideoDataModel
+import com.example.guruvedamentor.Fragments.MyClasses.DataModel.VideoDataModel
 import com.example.guruvedamentor.R
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -73,6 +73,11 @@ class VideoDetailsActivity : AppCompatActivity() {
             }
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        player.release()
     }
 
 }

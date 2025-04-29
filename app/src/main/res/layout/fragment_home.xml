@@ -71,6 +71,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        app:cardCornerRadius="10dp"
         >
 
         <com.denzcoskun.imageslider.ImageSlider
@@ -403,8 +404,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recommendedRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="230dp"
                 tools:listitem="@layout/recommended_courses_video_layout"
+                android:orientation="horizontal"
                 />
 
             <TextView
@@ -418,7 +420,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/freeVideosRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 />
 
         </LinearLayout>
