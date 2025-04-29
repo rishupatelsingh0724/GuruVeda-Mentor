@@ -74,12 +74,49 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:961682338072:android:d2fa97040d795979dc6e6d",
+        "android_client_info": {
+          "package_name": "com.example.guruveda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961682338072-2m45tlcedhedi3nto9jbaca6qttiavkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQicxBXCBsbooTeH-h9jJMNFBhlD-V29Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961682338072-2m45tlcedhedi3nto9jbaca6qttiavkl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:961682338072:android:35dcbe67edc9ba68dc6e6d",
         "android_client_info": {
           "package_name": "com.example.guruvedamentor"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "961682338072-i665kdp9a9bmcunvjp9d0jsnsdi2t79u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.guruvedamentor",
+            "certificate_hash": "d13af26cce1d2a5c7c74ffe55d7b7179fad711ab"
+          }
+        },
         {
           "client_id": "961682338072-2m45tlcedhedi3nto9jbaca6qttiavkl.apps.googleusercontent.com",
           "client_type": 3

@@ -54,12 +54,24 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardSlide"
         android:layout_width="360dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        app:cardCornerRadius="10dp"
         >
 
         <com.denzcoskun.imageslider.ImageSlider
@@ -93,7 +105,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/myBatches"
+                android:id="@+id/myCourses"
                 android:layout_width="118dp"
                 android:layout_height="50dp"
                 app:cardCornerRadius="10dp"
@@ -118,7 +130,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="My Batches"
+                            android:text="My Courses"
                             android:layout_marginLeft="2dp"
                             />
 
@@ -392,7 +404,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recommendedRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="230dp"
+                tools:listitem="@layout/recommended_courses_video_layout"
+                android:orientation="horizontal"
                 />
 
             <TextView
@@ -406,7 +420,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/freeVideosRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 />
 
         </LinearLayout>
@@ -415,7 +429,8 @@
 
     </LinearLayout>
 
-
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
