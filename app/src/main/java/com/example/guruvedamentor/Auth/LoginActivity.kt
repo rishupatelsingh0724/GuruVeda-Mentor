@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Approval Pending. Please wait!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, " Please wait For Approval Pending!", Toast.LENGTH_LONG).show()
                         auth.signOut()
                     }
                 } else {

@@ -34,10 +34,10 @@ class GetQuestionAdapter(private val questionList: ArrayList<QuestionDataModel>,
     ) {
       val currentItem=questionList[position]
         holder.question.text=currentItem.question
-        holder.optionA.text="Option: ${currentItem.optionA}"
-        holder.optionB.text="Option: ${currentItem.optionB}"
-        holder.optionC.text="Option: ${currentItem.optionC}"
-        holder.optionD.text="Option: ${currentItem.optionD}"
+        holder.optionA.text="A: ${currentItem.optionA}"
+        holder.optionB.text="B: ${currentItem.optionB}"
+        holder.optionC.text="C: ${currentItem.optionC}"
+        holder.optionD.text="D: ${currentItem.optionD}"
         holder.correctAnswer.text="Correct Answer: ${currentItem.correctAnswer}"
 
         holder.menuImageView.setOnClickListener {

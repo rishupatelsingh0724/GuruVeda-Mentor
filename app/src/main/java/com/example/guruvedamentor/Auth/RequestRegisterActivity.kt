@@ -1,7 +1,9 @@
 package com.example.guruvedamentor.Auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,14 +29,17 @@ class RequestRegisterActivity : AppCompatActivity() {
         val name = findViewById<EditText>(R.id.etName)
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
         val mobile = findViewById<EditText>(R.id.etMobile)
+        val tvSignupNow = findViewById<TextView>(R.id.tvSignupNow)
+        tvSignupNow.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         val btnRegister = findViewById<AppCompatButton>(R.id.btnRegister)
 
         btnRegister.setOnClickListener {
-
-
-
 
                 val etEmail = email.text.toString()
                 val etName = name.text.toString()
@@ -83,7 +88,7 @@ class RequestRegisterActivity : AppCompatActivity() {
                                         Toast.makeText(this, "User ID is null!", Toast.LENGTH_SHORT).show()
                                     }
                                 } else {
-                                    Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT)
+                                    Toast.makeText(this, "User already exists!", Toast.LENGTH_SHORT)
                                         .show()
                                 }
                             }

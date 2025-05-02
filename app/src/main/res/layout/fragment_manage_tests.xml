@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Fragments.ManageTestsFragment">
 
     <LinearLayout
@@ -17,6 +18,14 @@
             android:id="@+id/test_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/test_empty_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/empty_img"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 

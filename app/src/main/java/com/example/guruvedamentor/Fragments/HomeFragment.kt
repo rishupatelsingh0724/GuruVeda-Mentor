@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -41,6 +42,8 @@ class HomeFragment : Fragment() {
     lateinit var myCoursesList:ArrayList<CourseDataModel>
     lateinit var freeVideosList:ArrayList<FreeVideosDataModel>
     lateinit var freeVideosAdapter:FreeVideosAdapter
+    lateinit var emptyImage:ImageView
+    lateinit var freeEmptyImage:ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +74,9 @@ class HomeFragment : Fragment() {
         recordedBatches=view.findViewById(R.id.recordedBatches)
         lectureVideos=view.findViewById(R.id.lectureVideos)
         freeVideos=view.findViewById(R.id.freeVideosRecyclerView)
+         emptyImage=view.findViewById<ImageView>(R.id.empty_img)
+         freeEmptyImage=view.findViewById<ImageView>(R.id.free_empty_img)
+
 
 
 
@@ -129,6 +135,7 @@ class HomeFragment : Fragment() {
         getRecommendedCourses()
         getFreeVideos()
 
+
         return view
     }
     @SuppressLint("NotifyDataSetChanged")
@@ -142,6 +149,13 @@ class HomeFragment : Fragment() {
                     myCoursesList.add(course!!)
                 }
                 myCoursesAdapter.notifyDataSetChanged()
+                if (myCoursesList.isEmpty()){
+                    emptyImage.visibility=View.VISIBLE
+                    recommendedCourses.visibility=View.GONE
+                }else{
+                    emptyImage.visibility=View.GONE
+                    recommendedCourses.visibility=View.VISIBLE
+                }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
@@ -158,7 +172,13 @@ class HomeFragment : Fragment() {
                     freeVideosList.add(video!!)
                 }
                 freeVideosAdapter.notifyDataSetChanged()
-                Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+                if (freeVideosList.isEmpty()){
+                    freeEmptyImage.visibility=View.VISIBLE
+                    freeVideos.visibility=View.GONE
+                }else{
+                    freeEmptyImage.visibility=View.GONE
+                    freeVideos.visibility=View.VISIBLE
+                }
                 }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
