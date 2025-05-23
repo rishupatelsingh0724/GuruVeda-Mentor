@@ -1,6 +1,7 @@
 [versions]
-agp = "8.9.1"
+agp = "8.9.2"
 androidPdfViewer = "3.2.0-beta.3"
+androidPdfViewerVersion = "3.2.0-beta.3"
 glide = "4.16.0"
 imageslideshow = "0.1.2"
 kotlin = "2.1.0"
@@ -49,6 +50,7 @@ googleid = { group = "com.google.android.libraries.identity.googleid", name = "g
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+mhiew-android-pdf-viewer = { module = "com.github.mhiew:android-pdf-viewer", version.ref = "androidPdfViewerVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

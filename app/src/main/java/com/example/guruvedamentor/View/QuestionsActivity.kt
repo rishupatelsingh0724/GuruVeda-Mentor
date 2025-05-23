@@ -15,6 +15,7 @@ import com.example.guruvedamentor.Adapters.GetQuestionAdapter
 import com.example.guruvedamentor.DataModel.QuestionDataModel
 import com.example.guruvedamentor.Interface.OnQuestionItemClickListener
 import com.example.guruvedamentor.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class QuestionsActivity : AppCompatActivity(), OnQuestionItemClickListener {
@@ -47,7 +48,8 @@ class QuestionsActivity : AppCompatActivity(), OnQuestionItemClickListener {
     }
     @SuppressLint("NotifyDataSetChanged")
     fun getQuestions(){
-        dp.collection("teacher_tests_question").get().addOnSuccessListener {
+        val userId= FirebaseAuth.getInstance().currentUser?.uid
+        dp.collection("teacher_tests_question").whereEqualTo("teacherId",userId).get().addOnSuccessListener {
             questionList.clear()
             for (dataSnapshot in it) {
                 val question = dataSnapshot.toObject(QuestionDataModel::class.java)

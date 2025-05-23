@@ -30,6 +30,9 @@
         android:theme="@style/Theme.GuruVedaMentor"
         tools:targetApi="31">
         <activity
+            android:name=".View.UpdatePDFActivity"
+            android:exported="false" />
+        <activity
             android:name=".View.PDFViewerActivity"
             android:exported="false" />
         <activity

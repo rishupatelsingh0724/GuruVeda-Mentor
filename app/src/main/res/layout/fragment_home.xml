@@ -397,31 +397,76 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recommended Courses"
+                android:text="Your Recommended Courses"
                 android:textSize="18dp"
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recommendedRecyclerView"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
-                tools:listitem="@layout/recommended_courses_video_layout"
-                android:orientation="horizontal"
-                />
+                android:layout_height="220dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recommendedRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/recommended_courses_video_layout"
+                    android:orientation="horizontal"
+                    />
+
+                <ImageView
+                    android:id="@+id/empty_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/empty_img"
+                    android:visibility="gone"
+                    />
+
+                <ProgressBar
+                    android:id="@+id/recommendedRecyclerViewProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    />
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Free Videos"
+                android:text="Your Free Videos"
                 android:textSize="18dp"
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/freeVideosRecyclerView"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                />
+                android:layout_height="200dp">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/freeVideosRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/free_empty_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/empty_img"
+                    android:visibility="gone"
+                    />
+                <ProgressBar
+                    android:id="@+id/freeVideosRecyclerViewProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
 
         </LinearLayout>
 

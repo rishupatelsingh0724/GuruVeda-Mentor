@@ -6,9 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,18 +30,22 @@ class HomeFragment : Fragment() {
 
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
-    lateinit var recommendedCourses:RecyclerView
-    lateinit var myCourses:CardView
-    lateinit var manageTests:CardView
-    lateinit var studyMaterial:CardView
-    lateinit var liveBatches:CardView
-    lateinit var recordedBatches:CardView
-    lateinit var lectureVideos:CardView
-    lateinit var freeVideos:RecyclerView
+    lateinit var recommendedCourses: RecyclerView
+    lateinit var myCourses: CardView
+    lateinit var manageTests: CardView
+    lateinit var studyMaterial: CardView
+    lateinit var liveBatches: CardView
+    lateinit var recordedBatches: CardView
+    lateinit var lectureVideos: CardView
+    lateinit var freeVideos: RecyclerView
     lateinit var myCoursesAdapter: RecommendedCoursesAdapter
-    lateinit var myCoursesList:ArrayList<CourseDataModel>
-    lateinit var freeVideosList:ArrayList<FreeVideosDataModel>
-    lateinit var freeVideosAdapter:FreeVideosAdapter
+    lateinit var myCoursesList: ArrayList<CourseDataModel>
+    lateinit var freeVideosList: ArrayList<FreeVideosDataModel>
+    lateinit var freeVideosAdapter: FreeVideosAdapter
+    lateinit var emptyImage: ImageView
+    lateinit var freeEmptyImage: ImageView
+    lateinit var recommendedRecyclerViewProgressBar: ProgressBar
+    lateinit var freeRecyclerViewProgressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,31 +59,42 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view=inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        db= FirebaseFirestore.getInstance()
-        auth= FirebaseAuth.getInstance()
-        myCoursesList= ArrayList()
-        myCoursesAdapter= RecommendedCoursesAdapter(myCoursesList)
-        freeVideosList= ArrayList()
-        freeVideosAdapter= FreeVideosAdapter(freeVideosList)
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        myCoursesList = ArrayList()
+        myCoursesAdapter = RecommendedCoursesAdapter(myCoursesList)
+        freeVideosList = ArrayList()
+        freeVideosAdapter = FreeVideosAdapter(freeVideosList)
 
-        recommendedCourses=view.findViewById(R.id.recommendedRecyclerView)
-        myCourses=view.findViewById(R.id.myCourses)
-        manageTests=view.findViewById(R.id.manageTests)
-        studyMaterial=view.findViewById(R.id.studyMaterial)
-        liveBatches=view.findViewById(R.id.liveBatches)
-        recordedBatches=view.findViewById(R.id.recordedBatches)
-        lectureVideos=view.findViewById(R.id.lectureVideos)
-        freeVideos=view.findViewById(R.id.freeVideosRecyclerView)
+        recommendedCourses = view.findViewById(R.id.recommendedRecyclerView)
+        myCourses = view.findViewById(R.id.myCourses)
+        manageTests = view.findViewById(R.id.manageTests)
+        studyMaterial = view.findViewById(R.id.studyMaterial)
+        liveBatches = view.findViewById(R.id.liveBatches)
+        recordedBatches = view.findViewById(R.id.recordedBatches)
+        lectureVideos = view.findViewById(R.id.lectureVideos)
+        freeVideos = view.findViewById(R.id.freeVideosRecyclerView)
+        emptyImage = view.findViewById<ImageView>(R.id.empty_img)
+        freeEmptyImage = view.findViewById<ImageView>(R.id.free_empty_img)
+        recommendedRecyclerViewProgressBar =
+            view.findViewById(R.id.recommendedRecyclerViewProgressBar)
+        recommendedRecyclerViewProgressBar.visibility = View.VISIBLE
+        freeRecyclerViewProgressBar = view.findViewById(R.id.freeVideosRecyclerViewProgressBar)
+        freeRecyclerViewProgressBar.visibility = View.VISIBLE
 
 
 
-        recommendedCourses.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+
+
+        recommendedCourses.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         recommendedCourses.adapter = myCoursesAdapter
 
-        freeVideos.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        freeVideos.adapter=freeVideosAdapter
+        freeVideos.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        freeVideos.adapter = freeVideosAdapter
 
 
         myCourses.setOnClickListener {
@@ -115,8 +131,6 @@ class HomeFragment : Fragment() {
         }
 
 
-
-
         val imageSlider = view.findViewById<ImageSlider>(R.id.image_slider)
 
         val imageList = ArrayList<SlideModel>()
@@ -129,10 +143,12 @@ class HomeFragment : Fragment() {
         getRecommendedCourses()
         getFreeVideos()
 
+
         return view
     }
+
     @SuppressLint("NotifyDataSetChanged")
-    fun getRecommendedCourses(){
+    fun getRecommendedCourses() {
         db.collection("courses")
             .get()
             .addOnSuccessListener {
@@ -141,7 +157,16 @@ class HomeFragment : Fragment() {
                     val course = document.toObject(CourseDataModel::class.java)
                     myCoursesList.add(course!!)
                 }
+                recommendedRecyclerViewProgressBar.visibility = View.GONE
                 myCoursesAdapter.notifyDataSetChanged()
+                if (myCoursesList.isEmpty()) {
+                    emptyImage.visibility = View.VISIBLE
+                    recommendedCourses.visibility = View.GONE
+                    recommendedRecyclerViewProgressBar.visibility = View.GONE
+                } else {
+                    emptyImage.visibility = View.GONE
+                    recommendedCourses.visibility = View.VISIBLE
+                }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
@@ -149,23 +174,30 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun getFreeVideos(){
-        db.collection("videos").whereEqualTo("type","Free").get()
+    fun getFreeVideos() {
+        db.collection("videos").whereEqualTo("type", "Free").get()
             .addOnSuccessListener {
                 freeVideosList.clear()
                 for (document in it.documents) {
                     val video = document.toObject(FreeVideosDataModel::class.java)
                     freeVideosList.add(video!!)
                 }
+                freeRecyclerViewProgressBar.visibility = View.GONE
                 freeVideosAdapter.notifyDataSetChanged()
-                Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+                if (freeVideosList.isEmpty()) {
+                    freeEmptyImage.visibility = View.VISIBLE
+                    freeVideos.visibility = View.GONE
+                    freeRecyclerViewProgressBar.visibility = View.GONE
+                } else {
+                    freeEmptyImage.visibility = View.GONE
+                    freeVideos.visibility = View.VISIBLE
                 }
+            }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
             }
 
     }
-
 
 
 }

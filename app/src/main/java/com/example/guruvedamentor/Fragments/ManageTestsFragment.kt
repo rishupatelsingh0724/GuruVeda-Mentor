@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,12 +32,16 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
     var testScheduleList = ArrayList<TeacherTestScheduleDataModel>()
     lateinit var adapter: TeacherTestsSchedule
     lateinit var recyclerView: RecyclerView
+    lateinit var emptyImg: ImageView
+    lateinit var test_recyclerViewProgressBar: ProgressBar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +49,9 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_manage_tests, container, false)
         recyclerView = view.findViewById(R.id.test_recyclerView)
+        emptyImg = view.findViewById<ImageView>(R.id.test_empty_img)
+        test_recyclerViewProgressBar = view.findViewById(R.id.test_recyclerViewProgressBar)
+        test_recyclerViewProgressBar.visibility = View.VISIBLE
 
         db = FirebaseFirestore.getInstance()
         adapter = TeacherTestsSchedule(testScheduleList, this,this)
@@ -56,14 +65,13 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
             startActivity(intent)
 
         }
-
-
         getTestSchedule()
         return view
 
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun getTestSchedule(){
         db.collection("teacher_tests_schedule").whereEqualTo("teacherId", userId)
             .get()
@@ -72,8 +80,18 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
                for (dataSnapshot in result){
                    val testSchedule=dataSnapshot.toObject(TeacherTestScheduleDataModel::class.java)
                    testScheduleList.add(testSchedule)
-                   adapter.notifyDataSetChanged()
+
                }
+                test_recyclerViewProgressBar.visibility = View.GONE
+                adapter.notifyDataSetChanged()
+                if (testScheduleList.isEmpty()) {
+                    emptyImg.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                    test_recyclerViewProgressBar.visibility = View.GONE
+                } else {
+                    emptyImg.visibility = View.GONE
+                    recyclerView.visibility = View.VISIBLE
+                }
             }
     }
 
@@ -129,8 +147,6 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
         }
         alertDialog.setView(layout)
         alertDialog.show()
-
-
     }
 
     @SuppressLint("MissingInflatedId")
@@ -174,6 +190,7 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
                         "Tests Schedule updated successfully",
                         Toast.LENGTH_SHORT
                     ).show()
+                    getTestSchedule()
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "update Failed", Toast.LENGTH_SHORT).show()
@@ -201,6 +218,10 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
                         "Tests Schedule deleted successfully",
                         Toast.LENGTH_SHORT
                     ).show()
+                    getTestSchedule()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "delete Failed", Toast.LENGTH_SHORT).show()
                 }
 
         }
