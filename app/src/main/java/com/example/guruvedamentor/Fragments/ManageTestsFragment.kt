@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,7 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
     lateinit var adapter: TeacherTestsSchedule
     lateinit var recyclerView: RecyclerView
     lateinit var emptyImg: ImageView
+    lateinit var test_recyclerViewProgressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +50,8 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
         val view = inflater.inflate(R.layout.fragment_manage_tests, container, false)
         recyclerView = view.findViewById(R.id.test_recyclerView)
         emptyImg = view.findViewById<ImageView>(R.id.test_empty_img)
+        test_recyclerViewProgressBar = view.findViewById(R.id.test_recyclerViewProgressBar)
+        test_recyclerViewProgressBar.visibility = View.VISIBLE
 
         db = FirebaseFirestore.getInstance()
         adapter = TeacherTestsSchedule(testScheduleList, this,this)
@@ -78,10 +82,12 @@ class ManageTestsFragment : Fragment(), AddQuestionInterface, UpdateTestSchedule
                    testScheduleList.add(testSchedule)
 
                }
+                test_recyclerViewProgressBar.visibility = View.GONE
                 adapter.notifyDataSetChanged()
                 if (testScheduleList.isEmpty()) {
                     emptyImg.visibility = View.VISIBLE
                     recyclerView.visibility = View.GONE
+                    test_recyclerViewProgressBar.visibility = View.GONE
                 } else {
                     emptyImg.visibility = View.GONE
                     recyclerView.visibility = View.VISIBLE

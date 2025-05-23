@@ -4,13 +4,16 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guruvedamentor.DataModel.PdfModel
+import com.example.guruvedamentor.Interface.PDFUpdateAndDelete
 import com.example.guruvedamentor.R
 import com.example.guruvedamentor.View.PDFViewerActivity
 
-class PDFAdapter(private val pdfList: ArrayList<PdfModel>) :RecyclerView.Adapter<PDFAdapter.PDFViewHolder>() {
+class PDFAdapter(private val pdfList: ArrayList<PdfModel>,val listener: PDFUpdateAndDelete) :RecyclerView.Adapter<PDFAdapter.PDFViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -25,6 +28,26 @@ class PDFAdapter(private val pdfList: ArrayList<PdfModel>) :RecyclerView.Adapter
     ) {
         val pdf=pdfList[position]
         holder.pdfTittle.text=pdf.pdfTitle
+        holder.onClickImageView.setOnClickListener {
+
+                val popup = PopupMenu(holder.itemView.context, holder.onClickImageView)
+                popup.inflate(R.menu.question_item_menu)
+
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.menu_update -> {
+                            listener.onUpdateClicked(position, pdf)
+                            true
+                        }
+                        R.id.menu_delete -> {
+                            listener.onDeleteClicked(position, pdf)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                popup.show()
+        }
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
@@ -35,11 +58,12 @@ class PDFAdapter(private val pdfList: ArrayList<PdfModel>) :RecyclerView.Adapter
 
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int {1
        return pdfList.size
     }
 
     class PDFViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val pdfTittle=itemView.findViewById<TextView>(R.id.pdfTittle)
+        val onClickImageView=itemView.findViewById<ImageView>(R.id.onClickImageView)
     }
 }

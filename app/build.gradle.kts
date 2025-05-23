@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.exoplayer.dash)
     implementation(libs.androidx.media3.ui)
-    implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.3")
+    implementation(libs.mhiew.android.pdf.viewer)
+
 
 }

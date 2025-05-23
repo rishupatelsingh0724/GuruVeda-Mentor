@@ -27,11 +27,19 @@
 
             <TextView
                 android:id="@+id/pdfTittle"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
                 android:text="PDF Tittle"
+                />
+
+            <ImageView
+                android:id="@+id/onClickImageView"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/three_dot"
+                android:layout_marginStart="5dp"
                 />
 
         </LinearLayout>
